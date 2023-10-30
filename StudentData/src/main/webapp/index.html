@@ -1,68 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgb(192, 192, 192);
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        label {
-            display: block;
-            margin-top: 10px;
-        }
-
-        input[type="text"] {
-            width: 550px;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-         input[type="number"] {
-            width: 550px;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
- input[type="date"] {
-            width: 550px;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        input[type="submit"] {
-            background: #333;
-            color: #fff;
-            border: 0;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background: #555;
-        }
-    </style>
+<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+	<script src="js/JavaScript.js"></script>
     <div class="container">
         <h1>Student Data</h1>
         <form method="post" action="sd" onsubmit="return validatePhoneNumber()">
@@ -87,15 +29,5 @@
             <input type="submit" value="Submit"> 
         </form>
     </div>
-    <script>
-		function validatePhoneNumber(){
-			var phoneNumer=document.getElementById('phno').value;
-			var msg=document.getElementById('message');		
-			if(phoneNumer.length !==10){
-				msg.textContent="*Phone number must be 10 digit...";
-				return false;
-			}	
-		}
-    </script>
 </body>
 </html>
