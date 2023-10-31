@@ -24,7 +24,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOE
 	Connection con=null;
 	PreparedStatement ps=null;
 	ResultSet rs=null;
-	String qry="select student_name, regno, dept, phno, email, dob from students_data where regno=? and dob=?";
+	String qry="select student_name, regno, dept, phno, email, dob, date_time from students_data where regno=? and dob=?";
 	
 	try {
 		Class.forName("com.mysql.cj.jdbc.Driver");
@@ -40,6 +40,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOE
 			String phno=rs.getString("phno");
 			String email=rs.getString("email");
 			String date=rs.getString("dob");
+			String datetime=rs.getString("date_time");
 			out.println("<!DOCTYPE html>\r\n"
 					+ "<html>\r\n"
 					+ "<head>\r\n"
@@ -85,6 +86,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOE
 					+ "        <p>Phone Number: "+phno+"</p>\r\n"
 					+ "        <p>Email: "+email+"</p>\r\n"
 					+ "        <p>Date of Birth:"+date+"</p>\r\n"
+					+"         <p>Data created date & time:"+datetime+"</p>\r\n"
 					+ "    </div>\r\n"
 					+ "</body>\r\n"
 					+ "</html>\r\n"
