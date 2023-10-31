@@ -10,9 +10,11 @@ function validatePhoneNumber(){
 		 window.addEventListener('load', function() {
             const studentButton = document.getElementById('student-login');
             const adminButton = document.getElementById('admin-login');
+            const updateButton = document.getElementById('update-student');
             setTimeout(function() {
                 studentButton.style.opacity = '1';
                 adminButton.style.opacity = '1';
+                updateButton.style.opacity = '1';
             }, 1000); 
         });
         
