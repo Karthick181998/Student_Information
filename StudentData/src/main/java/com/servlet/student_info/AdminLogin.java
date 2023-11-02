@@ -23,14 +23,39 @@ public class AdminLogin extends HttpServlet{
 		String adminName=req.getParameter("username");
 		String passWord=req.getParameter("password");
 		PrintWriter out=res.getWriter();
+		
+		HttpSession hs = req.getSession();
+		
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String qry="select * from admin where admin_name=? and password=?";
-		if(adminName.equals("admin1") && passWord.equals("admin1")) {
-			HttpSession hs=req.getSession();
-			hs.setAttribute("uname", adminName);
-			res.sendRedirect("admin_login_success.jsp");
+		String qry="select admin_name,password from admin where admin_name=? and password=?";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/student_info?"+"user=root&password=kutty");
+			ps=con.prepareStatement(qry);
+			ps.setString(1, adminName);
+			ps.setString(2, passWord);
+	        rs=ps.executeQuery();
+	        while (rs.next()) {
+	            String name = rs.getString("admin_name");
+	            String password = rs.getString("password");
+
+	            if (adminName.equals(name) && passWord.equals(password)) {
+	                res.sendRedirect("admin_login_success.jsp");
+	                hs.setAttribute("uname", name);
+	            }
+	    		
+	        }
+	      
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		 if (adminName.equals("admin1") && passWord.equals("admin1")) {
+		        hs.setAttribute("uname", adminName);
+		        res.sendRedirect("admin_login_success.jsp");
 		}
 		else {
 			out.println("<html>"+"<head></head>"
@@ -40,35 +65,6 @@ public class AdminLogin extends HttpServlet{
 			rd.include(req, res);
 			
 		}
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/student_info?"+"user=root&password=kutty");
-			ps=con.prepareStatement(qry);
-			ps.setString(1, adminName);
-			ps.setString(2, passWord);
-	        rs=ps.executeQuery();
-	        while(rs.next()) {
-	        	
-	        	String name=rs.getString("admin_name");
-	        	String password=rs.getString("password");
-	     
-	        	
-	        	if(adminName.equals(name) && passWord.equals(password)) {
-	    			res.sendRedirect("admin_login_success.jsp");
-	    			HttpSession hs=req.getSession();
-	    			hs.setAttribute("uname", name);
-	    		}
-	    		
-	        }
-	        	
-	        		
-	        	
-	        
-	        
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
 	}
 
 }

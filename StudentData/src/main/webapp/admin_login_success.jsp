@@ -10,8 +10,9 @@
 	<script src="js/JavaScript.js"></script>
     <header>
         <h1>Welcome to <%=session.getAttribute("uname")%></h1>
+        <button class="login-button" id="student-add" onclick="location.href='add_admin.html'">Add admin</button>
     </header>
-
+ 
     <div class="login-container">
         <h2>Select Your Operation</h2>
         <div class="login-options">
